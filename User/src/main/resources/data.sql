@@ -1,0 +1,1 @@
+insert into users(id, name, login, passwd, accountbalance, cards ) values(1,'Kevin Durant','test','test', 5000, '');

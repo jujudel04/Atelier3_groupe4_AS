@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "USERS")
+@Table(name = "LOGINS")
 public class Login {
 	@Id
 	@GeneratedValue

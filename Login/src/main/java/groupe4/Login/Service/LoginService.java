@@ -31,11 +31,11 @@ public class LoginService {
 
 	
 
-	public boolean signup(String login, String passwd) {
+	public Integer signup(String login, String passwd) {
 		AuthDto dto = new AuthDto();
 		dto.setLogin(login);
 		dto.setPasswd(passwd);
-		ResponseEntity<Boolean> reponse = new RestTemplate().postForEntity("http://localhost:8080/user/signup", dto , Boolean.class);
+		ResponseEntity<Integer> reponse = new RestTemplate().postForEntity("http://localhost:8082/user/signup", dto , Integer.class);
 		
 		return reponse.getBody();
 	}

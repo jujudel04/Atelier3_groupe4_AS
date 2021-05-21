@@ -21,8 +21,8 @@ public class LoginController {
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/login/signup")
 	public String signup(Model model, @RequestParam("login") String login, @RequestParam("passwd") String passwd) {
-		boolean authenticate = loginService.signup(login, passwd);
-		if (authenticate) {
+		Integer authenticateid = loginService.signup(login, passwd);
+		if (authenticateid != null) {
 			return "redirect:/user/show/" + authenticateid;
 		} else {
 			model.addAttribute("nok", "unreconnized user");

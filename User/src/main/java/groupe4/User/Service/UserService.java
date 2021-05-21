@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import groupe4.User.Repository.UserRepository;
-import groupe4.Card.Model.Card;
 import groupe4.User.Model.User;
 
 @Service
@@ -51,23 +50,5 @@ public class UserService {
 		return null;
 	}
 
-	public void addCard(Card card, Integer userId) {
-		User user = this.getUser(userId);
-		if (user != null) {
-			user.addCard(card.getId());
-			user.updateBalance(-card.getPrice());
-			// for test
-			List<Integer> cs = user.getUserCardList();
-			this.saveUser(user);
-		}
-	}
 
-	public void removeCard(Card card, Integer userId) {
-		User user = this.getUser(userId);
-		if (user != null) {
-			user.removeCard(card.getId());
-			user.updateBalance(+card.getPrice());
-			this.saveUser(user);
-		}
-	}
 }

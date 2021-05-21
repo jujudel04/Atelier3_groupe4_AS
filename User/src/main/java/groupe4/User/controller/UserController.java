@@ -20,8 +20,8 @@ public class UserController {
 	
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/user/signup")
-	public boolean signup(Model model, @RequestParam("login") String login, @RequestParam("passwd") String passwd) {
+	public Integer signup(Model model, @RequestParam("login") String login, @RequestParam("passwd") String passwd) {
 		Integer authenticateid = userService.signup(login, passwd);
-		return (authenticateid != null);
+		return authenticateid;
 	}
 }
