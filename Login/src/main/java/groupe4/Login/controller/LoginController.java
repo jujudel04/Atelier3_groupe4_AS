@@ -18,4 +18,15 @@ public class LoginController {
 	@Autowired
 	LoginService loginService;
 	
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/login/signup")
+	public String signup(Model model, @RequestParam("login") String login, @RequestParam("passwd") String passwd) {
+		boolean authenticate = loginService.signup(login, passwd);
+		if (authenticate) {
+			return "redirect:/user/show/" + authenticateid;
+		} else {
+			model.addAttribute("nok", "unreconnized user");
+			return "index2";
+		}
+	}
 }
