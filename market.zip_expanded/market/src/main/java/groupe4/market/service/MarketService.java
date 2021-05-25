@@ -4,7 +4,9 @@ import java.util.List;
 
 
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 
 
@@ -15,7 +17,6 @@ public class MarketService {
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<UserDto> user = restTemplate.getForEntity("http://localhost:8080/User", UserDto.class);
 		ResponseEntity<CardDto> card = restTemplate.getForEntity("http://localhost:8081/Card", CardDto.class);
-		user = user.getUser(userId);
 		if (user != null) {
 			user.addCard(card.getId());
 			user.updateBalance(-card.getPrice());
@@ -27,9 +28,8 @@ public class MarketService {
 
 	public void removeCard(Integer userId) {
 		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<UserDto> user = restTemplate.getForEntity("http://localhost:8080/User", UserDto.class);
-		ResponseEntity<CardDto> card = restTemplate.getForEntity("http://localhost:8081/Card", CardDto.class);
-		user = user.getUser(userId);
+		UserDto user = restTemplate.getForObject("http://localhost:8080/User", UserDto.class);
+		CardDto card = restTemplate.getForObject("http://localhost:8081/Card", CardDto.class);
 		if (user != null) {
 			user.removeCard(card.getId());
 			user.updateBalance(+card.getPrice());
